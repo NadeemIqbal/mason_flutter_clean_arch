@@ -1,0 +1,19 @@
+import 'package:{{project_name.snakeCase()}}/domain/contracts/{{feature_name.snakeCase()}}_contract.dart';
+
+class {{feature_name.pascalCase()}}Impl implements {{feature_name.pascalCase()}}Contract {
+  final {{feature_name.pascalCase()}}Source _source;
+  
+  {{feature_name.pascalCase()}}Impl(this._source);
+  
+  @override
+  Future<List<{{feature_name.pascalCase()}}>> get{{feature_name.pascalCase()}}s() async {
+    final response = await _source.get{{feature_name.pascalCase()}}s();
+    return response.map((json) => {{feature_name.pascalCase()}}Model.fromJson(json)).toList();
+  }
+  
+  @override
+  Future<{{feature_name.pascalCase()}}> get{{feature_name.pascalCase()}}ById(String id) async {
+    final response = await _source.get{{feature_name.pascalCase()}}ById(id);
+    return {{feature_name.pascalCase()}}Model.fromJson(response);
+  }
+} 

@@ -1,0 +1,81 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:{{project_name.snakeCase()}}/core/dependency_injection/di_container.dart';
+{{#use_bloc}}import 'package:{{project_name.snakeCase()}}/presentation/{{feature_name.snakeCase()}}/blocs/{{feature_name.snakeCase()}}_bloc.dart';{{/use_bloc}}
+import 'package:{{project_name.snakeCase()}}/core/bloc/base_state.dart';
+
+class {{feature_name.pascalCase()}}Page extends StatelessWidget {
+  const {{feature_name.pascalCase()}}Page({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return {{#use_bloc}}BlocProvider(
+      create: (context) => DIContainer().get<{{feature_name.pascalCase()}}Bloc>()
+        ..add(Get{{feature_name.pascalCase()}}sEvent()),
+      child: {{/use_bloc}}Scaffold(
+        appBar: AppBar(
+          title: const Text('{{feature_name.titleCase()}}'),
+        ),
+        body: {{#use_bloc}}_{{feature_name.pascalCase()}}Body(){{/use_bloc}}{{^use_bloc}}const Center(
+          child: Text('{{feature_name.titleCase()}} Screen'),
+        ){{/use_bloc}},
+      ){{#use_bloc}},{{/use_bloc}}
+    );
+  }
+}
+
+{{#use_bloc}}
+class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<{{feature_name.pascalCase()}}Bloc, {{feature_name.pascalCase()}}State>(
+      builder: (context, state) {
+        if (state is LoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ErrorState) {
+          return Center(child: Text('Error: ${state.message}'));
+        } else if (state is SuccessState) {
+          final {{feature_name.camelCase()}}s = state.data;
+          return ListView.builder(
+            itemCount: {{feature_name.camelCase()}}s.length,
+            itemBuilder: (context, index) {
+              final {{feature_name.camelCase()}} = {{feature_name.camelCase()}}s[index];
+              return ListTile(
+                title: Text({{feature_name.camelCase()}}.toString()),
+                onTap: () => context.goNamed(
+                  '{{feature_name.camelCase()}}Details',
+                  pathParameters: {'id': {{feature_name.camelCase()}}.id},
+                ),
+              );
+            },
+          );
+        }
+        return const Center(child: Text('No data available'));
+      },
+    );
+  }
+}
+{{/use_bloc}}
+
+class {{feature_name.pascalCase()}}DetailsPage extends StatelessWidget {
+  final String id;
+  
+  const {{feature_name.pascalCase()}}DetailsPage({Key? key, required this.id}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('{{feature_name.titleCase()}} Details'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
+        ),
+      ),
+      body: Center(
+        child: Text('Details for {{feature_name.titleCase()}} $id'),
+      ),
+    );
+  }
+} 

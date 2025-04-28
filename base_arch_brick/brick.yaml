@@ -1,0 +1,22 @@
+name: base_arch_brick
+description: Creates the base clean architecture structure with all core modules
+version: 0.1.0
+
+environment:
+  mason: ^0.1.0
+
+vars:
+  project_name:
+    type: string
+    description: "Name of your project"
+    prompt: "What is your project name?"
+
+  default_platform_support:
+    type: list
+    description: "Select supported platforms"
+    prompt: "Which platforms do you want to support?"
+    defaults: ["mobile"]
+    values:
+      - mobile
+      - desktop
+      - tablet 

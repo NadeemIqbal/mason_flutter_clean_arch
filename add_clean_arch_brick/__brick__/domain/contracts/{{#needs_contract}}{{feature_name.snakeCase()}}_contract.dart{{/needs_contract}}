@@ -1,0 +1,4 @@
+abstract class {{feature_name.pascalCase()}}Contract {
+  Future<List<{{feature_name.pascalCase()}}>> get{{feature_name.pascalCase()}}s();
+  Future<{{feature_name.pascalCase()}}> get{{feature_name.pascalCase()}}ById(String id);
+} 

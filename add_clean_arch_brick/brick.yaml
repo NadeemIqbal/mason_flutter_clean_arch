@@ -1,0 +1,40 @@
+name: add_clean_arch_brick
+description: Adds a new feature to the clean architecture
+version: 0.1.0
+
+environment:
+  mason: ^0.1.0
+
+vars:
+  feature_name:
+    type: string
+    description: "Name of the feature"
+    prompt: "What is your feature name?"
+
+  needs_contract:
+    type: boolean
+    description: "Does this feature need a contract?"
+    prompt: "Do you need a contract for this feature?"
+    defaults: true
+
+  platform_support:
+    type: list
+    description: "Select supported platforms for this feature"
+    prompt: "Which platforms do you want to support for this feature?"
+    defaults: ["mobile"]
+    values:
+      - mobile
+      - desktop
+      - tablet
+
+  use_bloc:
+    type: boolean
+    description: "Use BLoC for state management?"
+    prompt: "Do you want to use BLoC for this feature?"
+    defaults: true
+
+  include_widgets:
+    type: boolean
+    description: "Include widget structure?"
+    prompt: "Do you want to include widget structure?"
+    defaults: true 

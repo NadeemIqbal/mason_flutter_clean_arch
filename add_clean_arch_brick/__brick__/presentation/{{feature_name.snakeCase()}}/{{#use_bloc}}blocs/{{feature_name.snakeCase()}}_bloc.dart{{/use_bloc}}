@@ -1,0 +1,27 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:{{project_name.snakeCase()}}/core/bloc/base_bloc.dart';
+import 'package:{{project_name.snakeCase()}}/domain/usecases/{{feature_name.snakeCase()}}_usecase.dart';
+
+part '{{feature_name.snakeCase()}}_event.dart';
+part '{{feature_name.snakeCase()}}_state.dart';
+
+class {{feature_name.pascalCase()}}Bloc extends BaseBloc<{{feature_name.pascalCase()}}Event, {{feature_name.pascalCase()}}State> {
+  final Get{{feature_name.pascalCase()}}UseCase _get{{feature_name.pascalCase()}}UseCase;
+  
+  {{feature_name.pascalCase()}}Bloc(this._get{{feature_name.pascalCase()}}UseCase) : super(InitialState()) {
+    on<Get{{feature_name.pascalCase()}}sEvent>(_onGet{{feature_name.pascalCase()}}s);
+  }
+  
+  Future<void> _onGet{{feature_name.pascalCase()}}s(
+    Get{{feature_name.pascalCase()}}sEvent event,
+    Emitter<{{feature_name.pascalCase()}}State> emit,
+  ) async {
+    emit(LoadingState());
+    try {
+      final {{feature_name.camelCase()}}s = await _get{{feature_name.pascalCase()}}UseCase(NoParams());
+      emit(SuccessState({{feature_name.camelCase()}}s));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+    }
+  }
+} 

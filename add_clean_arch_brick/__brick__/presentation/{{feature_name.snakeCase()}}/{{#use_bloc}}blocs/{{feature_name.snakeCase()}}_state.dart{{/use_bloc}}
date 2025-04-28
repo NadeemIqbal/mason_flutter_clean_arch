@@ -1,0 +1,5 @@
+part of '{{feature_name.snakeCase()}}_bloc.dart';
+
+abstract class {{feature_name.pascalCase()}}State extends BaseState {
+  const {{feature_name.pascalCase()}}State();
+} 

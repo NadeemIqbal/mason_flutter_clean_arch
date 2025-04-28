@@ -31,9 +31,9 @@ You can add these bricks to your Mason configuration:
 
 ```bash
 # Add bricks to your mason.yaml
-mason add base_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch_brick --git-path base_arch_brick
+mason add base_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch.git --git-path base_arch_brick
 
-mason add add_clean_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch_brick --git-path add_clean_arch_brick
+mason add add_clean_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch.git --git-path add_clean_arch_brick
 ```
 
 If you encounter any issues with the installation, try:
@@ -43,7 +43,7 @@ If you encounter any issues with the installation, try:
 dart pub global activate mason_cli
 
 # Then add the bricks
-mason add base_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch_brick --git-path base_arch_brick
+mason add base_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch.git --git-path base_arch_brick
 ```
 
 ## Usage

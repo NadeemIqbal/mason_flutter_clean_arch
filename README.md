@@ -27,23 +27,33 @@ Make sure your Mason version is at least 0.1.0+.
 
 ## Installation
 
-You can add these bricks to your Mason configuration:
+### Method 1: Clone and Add Locally
+
+This is the most reliable way to install the bricks:
 
 ```bash
-# Add bricks to your mason.yaml
+# Clone the repository
+git clone https://github.com/NadeemIqbal/mason_flutter_clean_arch.git
+
+# Add bricks from local path
+mason add base_arch_brick --path ./mason_flutter_clean_arch/base_arch_brick
+mason add add_clean_arch_brick --path ./mason_flutter_clean_arch/add_clean_arch_brick
+```
+
+### Method 2: Add from GitHub
+
+```bash
+# Add bricks directly from GitHub
 mason add base_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch.git --git-path base_arch_brick
 
 mason add add_clean_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch.git --git-path add_clean_arch_brick
 ```
 
-If you encounter any issues with the installation, try:
+If you encounter any issues with installation, try Method 1 or update your Mason version:
 
 ```bash
 # Update Mason
 dart pub global activate mason_cli
-
-# Then add the bricks
-mason add base_arch_brick --git-url https://github.com/NadeemIqbal/mason_flutter_clean_arch.git --git-path base_arch_brick
 ```
 
 ## Usage

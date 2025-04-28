@@ -1,47 +1,27 @@
 import 'package:flutter/material.dart';
-import 'core/dependency_injection/setup_di.dart';
 import 'core/config/app_config.dart';
+import 'core/dependency_injection/setup_di.dart';
+import 'core/routing/app_router.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize app configuration
-  AppConfig.initialize();
-  
-  // Setup dependencies
-  setupDependencies();
-  
-  runApp(const {{project_name}}App());
+  await AppConfig.init();
+  await setupDI();
+  runApp(const MyApp());
 }
 
-class {{project_name}}App extends StatelessWidget {
-  const {{project_name}}App({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppConfig.appName,
+    return MaterialApp.router(
+      title: '{{project_name.titleCase()}}',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: const HomePage(),
+      routerConfig: appRouter,
     );
   }
 }
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('{{project_name}}'),
-      ),
-      body: const Center(
-        child: Text('Welcome to {{project_name}}'),
-      ),
-    );
-  }
-} 
